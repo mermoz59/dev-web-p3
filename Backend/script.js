@@ -17,11 +17,10 @@ fetch('http://localhost:5678/api/works')
     const p = document.createElement('p');
     p.textContent = image.title;
 
+    container.appendChild(figure);
 
     figure.appendChild(img);
-    figure.appendChild(p);
-        
-    container.appendChild(figure);
+    figure.appendChild(p);    
   });
 })
 .catch(error => console.error(error))
@@ -89,20 +88,28 @@ for (let i = 0; i < elements.length; i++) {
         .then(data => {
         const container = document.getElementById('modal-gallery');
         container.innerHTML = "";
-        // container.style.display = 'flex';
-        // container.style.flexWrap = 'wrap';
 
         data.forEach(image => {
             const figure = document.createElement('figure');
+            figure.id = image.id;
             const img = document.createElement('img');
+            const iconsButton = document.createElement('div');
+            const iconDelete = document.createElement('button');
+            const iconMove = document.createElement('button');
+            
             img.src = image.imageUrl;
-            img.height = 105; 
-            img.width = 78;
             img.crossOrigin = "anonymous";
+            iconDelete.className = "fa-sharp fa-solid fa-trash-can"
+            iconDelete.id = "delete-button"
+            iconsButton.className = "button-modal"
+            iconMove.className = "fa-solid fa-up-down-left-right"
 
             figure.appendChild(img);
+            figure.appendChild(iconsButton);
                 
             container.appendChild(figure);
+            iconsButton.appendChild(iconMove)
+            iconsButton.appendChild(iconDelete)
         });
         })
         .catch(error => console.error(error))
@@ -125,3 +132,118 @@ for (let i = 0; i < elements.length; i++) {
 
     });
 }
+
+document.querySelector('#modal-gallery').addEventListener('click', function(event) {
+    if (event.target.id === 'delete-button') {
+    const figure = event.target.parentNode.parentNode;
+    const id = figure.id;
+    const token = localStorage.getItem('token');
+    
+    fetch(`http://localhost:5678/api/works/${id}`, {
+    method: 'DELETE',
+    headers: {
+    'Authorization': `Bearer ${token}`
+  }
+})
+
+.then(response => response.json())
+.then(data => {
+  if (data.success) {
+    figure.remove();
+  }
+})
+.catch(error => console.error(error));
+}
+});
+
+document.getElementById("add-button").addEventListener("click", function() {
+    document.getElementById("modal1").style.display = "none";
+    document.getElementById("modal2").style.display = "flex";
+});
+
+document.getElementById("button-go-back").addEventListener("click", function() {
+    document.getElementById("modal2").style.display = "none";
+    document.getElementById("modal1").style.display = "flex";
+});
+
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        document.querySelector('#modal2').style.display = 'none';
+    }
+});
+
+document.querySelector('#modal2').addEventListener('click', function(event) {
+    if (event.target === this) {
+        document.querySelector('#modal2').style.display = 'none';
+    }
+});
+
+document.querySelector('#button-close2').addEventListener('click', function() {
+    document.querySelector('#modal2').style.display = 'none';
+});
+
+document.getElementById('custom-file-input').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('file-input').click();
+});
+
+document.getElementById('file-input').addEventListener('change', function() {
+    var file = this.files[0];
+    var reader = new FileReader();
+
+    reader.addEventListener('load', function() {
+      document.getElementById('preview').src = reader.result;
+      document.getElementById('preview').style.display = 'block';
+    });
+
+    reader.readAsDataURL(file);
+});
+
+const titleInput = document.querySelector('#title-input');
+const categorySelect = document.querySelector('#category-select');
+const buttonValid = document.querySelector('#button-valid');
+
+function checkFields() {
+    if (titleInput.value.trim() !== '' && categorySelect.value !== '') {
+      buttonValid.style.backgroundColor = '#006400';
+      return true;
+    } else {
+      buttonValid.style.backgroundColor = '#808080';
+      return false;
+    }
+  }
+
+buttonValid.addEventListener('click', function(event) {
+    if (!checkFields()) {
+      alert('Veuillez remplir tous les champs.');
+      event.preventDefault();
+    }
+});
+
+titleInput.addEventListener('input', checkFields);
+categorySelect.addEventListener('change', checkFields);
+
+
+document.getElementById("button-valid").addEventListener("click", function(event) {
+    event.preventDefault();
+  
+    const title = document.getElementById("title-input").value;
+    const category = document.getElementById("category-select").value;
+  
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("category", category);
+    
+    const image = document.getElementById("file-input").files[0];
+    if (image) {
+    formData.append("image", image);
+    }
+  
+    const token = localStorage.getItem("token");
+    
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:5678/api/works");
+    xhr.setRequestHeader("Authorization", "Bearer " + token);
+    xhr.send(formData);
+});
