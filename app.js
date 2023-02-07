@@ -24,7 +24,7 @@ buttonAll.addEventListener("click", () => {
   buttonObjects.style.backgroundColor = "#FFF";
   buttonApartments.style.backgroundColor = "#FFF";
   buttonHotels.style.backgroundColor = "#FFF";
-  buttonAll.style.color = "black";
+  buttonAll.style.color = "white";
   buttonObjects.style.color = "#1D6154";
   buttonApartments.style.color = "#1D6154";
   buttonHotels.style.color = "#1D6154";
@@ -36,7 +36,7 @@ buttonObjects.addEventListener("click", () => {
   buttonApartments.style.backgroundColor = "#FFF";
   buttonHotels.style.backgroundColor = "#FFF";
   buttonAll.style.color = "#1D6154";
-  buttonObjects.style.color = "black";
+  buttonObjects.style.color = "white";
   buttonApartments.style.color = "#1D6154";
   buttonHotels.style.color = "#1D6154";
 });
@@ -48,7 +48,7 @@ buttonApartments.addEventListener("click", () => {
   buttonHotels.style.backgroundColor = "#FFF";
   buttonAll.style.color = "#1D6154";
   buttonObjects.style.color = "#1D6154";
-  buttonApartments.style.color = "black";
+  buttonApartments.style.color = "white";
   buttonHotels.style.color = "#1D6154";
 });
 
@@ -60,7 +60,7 @@ buttonHotels.addEventListener("click", () => {
   buttonAll.style.color = "#1D6154";
   buttonObjects.style.color = "#1D6154";
   buttonApartments.style.color = "#1D6154";
-  buttonHotels.style.color = "black";
+  buttonHotels.style.color = "white";
 });
 
 // MODAL DISPLAY

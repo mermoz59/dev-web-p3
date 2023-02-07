@@ -146,11 +146,12 @@ li:hover {
 	font-size: 16px;
 	font: inherit;
 	cursor: pointer;
+	font-family: 'Syne';
 }
 
 #filters-all {
 	background-color: #1D6154;
-	color: black;
+	color: white;
 }
 
 .gallery {

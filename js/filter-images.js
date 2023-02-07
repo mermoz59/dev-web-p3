@@ -7,8 +7,8 @@ export function filterImages(categoryIds) {
     .then(response => response.json())
     .then(data => {
         const container = document.getElementById('image-container');
-        container.innerHTML = "";
-        data.forEach(image => {
+        container.innerHTML = '';
+        data.forEach((image) => {
             if (categoryIds.includes(image.categoryId)) {
                 const figure = document.createElement('figure');
                 const img = document.createElement('img');
