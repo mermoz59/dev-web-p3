@@ -28,11 +28,14 @@ window.addEventListener('load', (event) => {
         loginButton.innerHTML = "logout";
         let aside = document.querySelector('.aside--top');
         aside.style.display = "flex";
+        let bodyAfter = document.querySelector('body');
+        bodyAfter.style.marginTop = "100px";
         let wrapperEdit = document.querySelectorAll('.wrapper--edit');
         let filtersBtn = document.querySelector('.filters--btn');
         filtersBtn.style.visibility = "hidden";
         wrapperEdit.forEach(element => {
             element.style.display = "flex";})
         }}
+        
         
 );
