@@ -1,20 +1,19 @@
-export function deleteItem() {
+export function deleteItem () {
   document.querySelector('#modal-gallery').addEventListener('click', (event) => {
     if (event.target.id === 'delete-button') {
-      const figure = event.target.parentNode.parentNode;
-      const { id } = figure;
-      const token = localStorage.getItem('token');
+      const figure = event.target.parentNode.parentNode
+      const { id } = figure
+      const token = localStorage.getItem('token')
 
       fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       })
 
         .then((response) => figure.remove())
-        .catch((error) => console.error(error));
-      location.reload();
+        .catch((error) => console.error(error))
     }
-  });
+  })
 }
