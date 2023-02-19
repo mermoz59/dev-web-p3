@@ -2,7 +2,7 @@
 import { postItem } from './js/post-item.js'
 import { modalDisplay } from './js/modal1.js'
 import { deleteItem } from './js/delete-item.js'
-import { displayGallery, container } from './js/gallery-display.js'
+import { displayGallery } from './js/gallery-display.js'
 import { imgPreview, titleInput, categorySelect, buttonValid, checkFields } from './js/file-input.js'
 import { filterImages, buttonAll, buttonObjects, buttonApartments, buttonHotels } from './js/filter-images.js'
 
@@ -81,23 +81,17 @@ document.getElementById('button-go-back').addEventListener('click', function () 
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Escape') {
     document.querySelector('#modal2').style.display = 'none'
-    container.innerHTML = ''
-    displayGallery()
   }
 })
 
 document.querySelector('#modal2').addEventListener('click', function (event) {
   if (event.target === this) {
     document.querySelector('#modal2').style.display = 'none'
-    container.innerHTML = ''
-    displayGallery()
   }
 })
 
 document.querySelector('#button-close2').addEventListener('click', function () {
   document.querySelector('#modal2').style.display = 'none'
-  container.innerHTML = ''
-  displayGallery()
 })
 
 document.getElementById('custom-file-input').addEventListener('click', function (e) {

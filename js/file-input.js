@@ -17,7 +17,8 @@ export const categorySelect = document.querySelector('#category-select')
 export const buttonValid = document.querySelector('#button-valid')
 
 export function checkFields () {
-  if (titleInput.value.trim() !== '' && categorySelect.value !== '') {
+  const fileInput = document.getElementById('file-input')
+  if (titleInput.value.trim() !== '' && categorySelect.value !== '404' && fileInput.files.length > 0) {
     buttonValid.style.backgroundColor = '#006400'
     return true
   } else {
@@ -25,13 +26,3 @@ export function checkFields () {
     return false
   }
 }
-
-buttonValid.addEventListener('click', function (event) {
-  if (!checkFields()) {
-    alert('Veuillez remplir tous les champs.')
-    event.preventDefault()
-  }
-})
-
-titleInput.addEventListener('input', checkFields)
-categorySelect.addEventListener('change', checkFields)
