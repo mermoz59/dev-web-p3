@@ -680,7 +680,7 @@ select {
 
 #button-valid {
 	top: 750px;
-	position: absolute;
+	margin-top: 40px;
 	padding: 10px 80px;
 	font-family: 'Syne';
 	font-style: normal;
