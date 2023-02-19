@@ -1,25 +1,22 @@
+export const container = document.getElementById('image-container')
+const response = await fetch('http://localhost:5678/api/works')
+export const data = await response.json()
+
 export function displayGallery () {
-  fetch('http://localhost:5678/api/works')
-    .then(response => response.json())
-    .then(data => {
-      const container = document.getElementById('image-container')
+  data.forEach(image => {
+    const figure = document.createElement('figure')
+    const img = document.createElement('img')
+    img.src = image.imageUrl
+    img.crossOrigin = 'anonymous'
 
-      data.forEach(image => {
-        const figure = document.createElement('figure')
-        const img = document.createElement('img')
-        img.src = image.imageUrl
-        img.crossOrigin = 'anonymous'
+    const p = document.createElement('p')
+    p.textContent = image.title
 
-        const p = document.createElement('p')
-        p.textContent = image.title
+    container.appendChild(figure)
 
-        container.appendChild(figure)
-
-        figure.appendChild(img)
-        figure.appendChild(p)
-      })
-    })
-    .catch(error => console.error(error))
+    figure.appendChild(img)
+    figure.appendChild(p)
+  })
 }
 
 window.addEventListener('load', (event) => {

@@ -21,6 +21,7 @@ export function postItem () {
     xhr.open('POST', 'http://localhost:5678/api/works')
     xhr.setRequestHeader('Authorization', 'Bearer ' + token)
     xhr.send(formData)
-    location.reload()
+
+    alert('Image ajoutée avec succès !')
   })
 }
