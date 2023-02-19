@@ -21,7 +21,7 @@ export function postItem () {
     const token = localStorage.getItem('token')
 
     try {
-      const response = fetch('http://localhost:5678/api/works', {
+      fetch('http://localhost:5678/api/works', {
         method: 'POST',
         headers: {
           Authorization: 'Bearer ' + token
