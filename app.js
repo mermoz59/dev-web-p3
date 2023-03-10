@@ -103,13 +103,6 @@ document.getElementById('custom-file-input').addEventListener('click', function 
 imgPreview()
 checkFields()
 
-// buttonValid.addEventListener('click', function (event) {
-//   if (!checkFields()) {
-//     alert('Veuillez remplir tous les champs.')
-//     event.preventDefault()
-//   }
-// })
-
 titleInput.addEventListener('input', checkFields)
 categorySelect.addEventListener('change', checkFields)
 
