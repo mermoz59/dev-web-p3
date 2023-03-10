@@ -1,9 +1,16 @@
 import { displayGallery } from './gallery-display.js'
+import { checkFields } from './file-input.js'
 
 export function postItem () {
-  document.getElementById('button-valid').addEventListener('click', function (event) {
+  document.getElementById('button-valid').addEventListener('click', async function (event) {
     console.log(event)
     event.preventDefault()
+
+    const isFieldsValid = checkFields()
+    if (!isFieldsValid) {
+      alert('Veuillez remplir tous les champs.')
+      return
+    }
 
     const title = document.getElementById('title-input').value
     const category = document.getElementById('category-select').value
@@ -21,7 +28,7 @@ export function postItem () {
     const token = localStorage.getItem('token')
 
     try {
-      fetch('http://localhost:5678/api/works', {
+      const response = await fetch('http://localhost:5678/api/works', {
         method: 'POST',
         headers: {
           Authorization: 'Bearer ' + token
@@ -29,8 +36,15 @@ export function postItem () {
         body: formData
       })
 
-      if (document.getElementById('button-valid').style.backgroundColor === 'rgb(0, 100, 0)') {
+      if (response.status === 201) {
         alert('Image ajoutée avec succès !')
+      } else if (response.status === 400) {
+        const error = await response.json()
+        alert(`Erreur : ${error.message}`)
+      } else if (response.status === 401) {
+        alert('Non autorisé.')
+      } else {
+        alert('Une erreur inattendue s\'est produite.')
       }
 
       container.innerHTML = ''

@@ -3,7 +3,7 @@ import { postItem } from './js/post-item.js'
 import { modalDisplay } from './js/modal1.js'
 import { deleteItem } from './js/delete-item.js'
 import { displayGallery } from './js/gallery-display.js'
-import { imgPreview, titleInput, categorySelect, buttonValid, checkFields } from './js/file-input.js'
+import { imgPreview, titleInput, categorySelect, checkFields } from './js/file-input.js'
 import { filterImages, buttonAll, buttonObjects, buttonApartments, buttonHotels } from './js/filter-images.js'
 
 // DISPLAY GALLERY
@@ -103,12 +103,12 @@ document.getElementById('custom-file-input').addEventListener('click', function 
 imgPreview()
 checkFields()
 
-buttonValid.addEventListener('click', function (event) {
-  if (!checkFields()) {
-    alert('Veuillez remplir tous les champs.')
-    event.preventDefault()
-  }
-})
+// buttonValid.addEventListener('click', function (event) {
+//   if (!checkFields()) {
+//     alert('Veuillez remplir tous les champs.')
+//     event.preventDefault()
+//   }
+// })
 
 titleInput.addEventListener('input', checkFields)
 categorySelect.addEventListener('change', checkFields)
